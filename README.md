@@ -20,6 +20,9 @@ wander --version
 
 ## Usage
 
+> Before using wander, make sure you have set up the Git email, and added `/.idea` (or `/.vscode`, and so on) to ignore and only ignore the IDE settings directory located in the root directory.
+> If you added `.idea` (or `.vscode`, and so on), you will ignore all the IDE settings directories, including the ones located in Wander storage.
+
 ```shell
 # Display users and saved files/directories 
 wander list
