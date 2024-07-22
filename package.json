@@ -1,0 +1,38 @@
+{
+  "name": "wander",
+  "description": "",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "wander": "bin/wander"
+  },
+  "scripts": {
+    "test": "",
+    "build": "tsc",
+    "publish": "rm -rf dist && tsc && npm publish"
+  },
+  "keywords": [
+    "project settings",
+    "migration",
+    "conflict prevention"
+  ],
+  "author": {
+    "name": "James Chan",
+    "email": "jameschan312.cn@gmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.14.11",
+    "eslint": "^9.7.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "email-validator": "^2.0.4",
+    "fs-extra": "^11.2.0"
+  }
+}
