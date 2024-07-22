@@ -8,6 +8,7 @@
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/.wander/jameschan312.cn@gmail.com/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/.wander" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
