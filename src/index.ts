@@ -11,7 +11,7 @@ const args: string[] = process.argv.slice(3)
 const commands_description = {
     list: 'Display all users and saved entries.',
     save: 'Save a file/directory to Wander storage.',
-    migrate: 'Migrate a file/directory from Wander storage.',
+    restore: 'Restore a file/directory from Wander storage.',
     help: 'Display detailed usage for a specific command.',
 } as const
 
@@ -21,7 +21,7 @@ const commands_detailed_description = {
         'destination path. The user\'s root directory is ' +
         '".wander/<email>". The target file/directory will then copy ' +
         'recursively to the destination path.',
-    migrate: 'This command serves as the reverse process of save. It moves' +
+    restore: 'This command serves as the reverse process of save. It moves ' +
         'the file/directory from the destination path to the target path.',
 } as const
 
@@ -55,16 +55,16 @@ switch (command) {
                 console.log(chalk.yellow(commands_description.list))
                 break
             case 'save':
-                console.log(chalk.magenta('save') + '<target>')
+                console.log(chalk.magenta('save') + chalk.blue(' <target>'))
                 console.log(chalk.yellow(commands_description.save))
                 console.log()
                 console.log(commands_detailed_description.save)
                 break
-            case 'migrate':
-                console.log(chalk.magenta('migrate') + '<target>')
-                console.log(chalk.yellow(commands_description.migrate))
+            case 'restore':
+                console.log(chalk.magenta('restore') + chalk.blue(' <target>'))
+                console.log(chalk.yellow(commands_description.restore))
                 console.log()
-                console.log(commands_detailed_description.migrate)
+                console.log(commands_detailed_description.restore)
                 break
             default:
                 console.log('Unknown command: ' + command)
@@ -73,7 +73,7 @@ switch (command) {
         break
     case 'list':
     case 'save':
-    case 'migrate':
+    case 'restore':
         resolveAction(command, args)
         break
     default:

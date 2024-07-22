@@ -1,10 +1,11 @@
 {
-  "name": "wander",
+  "name": "@typinghare/wander",
   "description": "",
   "version": "1.0.0",
   "main": "dist/index.js",
   "type": "module",
   "types": "dist/index.d.ts",
+  "homepage": "https://github.com/typinghare/wander",
   "bin": {
     "wander": "bin/wander"
   },
@@ -15,8 +16,12 @@
   },
   "keywords": [
     "project settings",
-    "migration",
-    "conflict prevention"
+    "conflict prevention",
+    "save",
+    "restore",
+    ".gitignore",
+    ".idea",
+    ".vscode"
   ],
   "author": {
     "name": "James Chan",

@@ -1,16 +1,16 @@
 import { fetchGitEmail } from './email.js'
-import { ensureUserDir, WANDER_DIR_PATH } from './directory.js'
+import { ensureUserDir, toRelativePath, WANDER_DIR_PATH } from './directory.js'
 import fs from 'fs-extra'
 import path from 'node:path'
 import chalk from 'chalk'
 
-export type ACTION = 'list' | 'save' | 'migrate'
+export type ACTION = 'list' | 'save' | 'restore'
 
 export function resolveAction(action: ACTION, args: string[]): void {
     const mapper = {
         list: listAllConfigurationItems,
         save: save,
-        migrate: migrate,
+        restore: restore,
     } as const
 
     mapper[action](args)
@@ -25,7 +25,7 @@ export async function listAllConfigurationItems(): Promise<void> {
             continue
         }
 
-        lines.push(chalk.cyan(email))
+        lines.push(chalk.cyan(email) + ` (${toRelativePath(userDir)})`)
 
         for (const fileName of await fs.readdir(userDir)) {
             lines.push('    ' + chalk.yellow(fileName))
@@ -52,6 +52,14 @@ async function getTargetAndDestPath(args: string[]): Promise<[string, string]> {
 export async function save(args: string[]): Promise<void> {
     const [targetPath, destPath] = await getTargetAndDestPath(args)
 
+    try {
+        await fs.access(targetPath)
+    } catch (ex) {
+        console.error('Target file or directory not found: ' + targetPath)
+        console.error('Abort saving')
+        process.exit(1)
+    }
+
     // Remove destination file if it exists
     await fs.rm(destPath, { recursive: true, force: true })
 
@@ -61,14 +69,15 @@ export async function save(args: string[]): Promise<void> {
     console.log(`Saved: ${targetPath} -> ${destPath}`)
 }
 
-export async function migrate(args: string[]): Promise<void> {
+export async function restore(args: string[]): Promise<void> {
     const [targetPath, destPath] = await getTargetAndDestPath(args)
 
     try {
         await fs.access(destPath)
     } catch (ex) {
-        console.error('Destination file or directory not found: ' + ex)
-        console.error('Abort migration')
+        console.error('Destination file or directory not found: ' +
+            toRelativePath(destPath))
+        console.error('Abort restoring')
         process.exit(1)
     }
 
@@ -78,5 +87,5 @@ export async function migrate(args: string[]): Promise<void> {
     // Copy the target file to the destination file
     await fs.copy(destPath, targetPath)
 
-    console.log(`Migrated: ${destPath} -> ${targetPath}`)
+    console.log(`Restored: ${destPath} -> ${targetPath}`)
 }
