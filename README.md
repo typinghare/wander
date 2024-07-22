@@ -9,7 +9,7 @@ To resolve this issue, Wander provides a solution by allowing you to save your I
 Ensure that you have installed Node.js and npm, then run the following command:
 
 ```shell
-npm install -g @typinghare/wander
+sudo npm install -g @typinghare/wander
 ```
 
 Check if Wander is installed successfully:

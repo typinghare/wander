@@ -12,7 +12,7 @@
   "scripts": {
     "test": "",
     "build": "tsc",
-    "publish": "rm -rf dist && tsc && npm publish"
+    "publish": "rm -rf dist && tsc && npm publish --access public"
   },
   "keywords": [
     "project settings",
