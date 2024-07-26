@@ -2,6 +2,8 @@ import * as process from 'node:process'
 import { resolveAction } from './actions.js'
 import fs from 'fs-extra'
 import chalk from 'chalk'
+import { fileURLToPath } from 'node:url'
+import path from 'node:path'
 
 const command: string = process.argv.length > 2 ?
     process.argv[2].toLowerCase().trim() :
@@ -28,8 +30,9 @@ const commands_detailed_description = {
 switch (command) {
     case '-v':
     case '--version':
+        const dirname = path.dirname(fileURLToPath(import.meta.url))
         const packageJsonContent: string
-            = fs.readFileSync('package.json', 'utf-8')
+            = fs.readFileSync(path.join(dirname, '..', 'package.json'), 'utf-8')
         const packageObject = JSON.parse(packageJsonContent)
         const version: string = packageObject['version']
         const author: string = packageObject['author']['name']
