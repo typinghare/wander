@@ -10,7 +10,6 @@
     "wander": "bin/wander"
   },
   "scripts": {
-    "test": "",
     "build": "tsc",
     "publish": "rm -rf dist && tsc && npm publish --access public"
   },
